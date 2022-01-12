@@ -1,27 +1,42 @@
 <template>
   <div>
-    <b-img
-      :src="require('../assets/logo.png')"
-      fluid
-      alt="Responsive image"
-      style="margin-top: 60px"
-    ></b-img>
-    <b-card class="card" bg-variant="dark" text-variant="white">
-      <b-card-body>
-        <div style="display: flex; width: 50%">
-          <b-form class="sel">
-            <label for="bairros">Bairro</label>
-            <div class="sel">
-              <b-form-select
-                class="select"
-                id="bairros"
-                label-field="bairros"
-                :options="options"
-                @change="onChange($event)"
-              ></b-form-select>
-            </div>
-          </b-form>
-          <!-- <b-form class="sel">
+    <div>
+      <Menu />
+    </div>
+    <div class="home">
+      <!-- <b-img
+        :src="require('../assets/logo.png')"
+        fluid
+        alt="Responsive image"
+        style="margin-top: 30px"
+      ></b-img> -->
+      <b-card class="card" bg-variant="dark" text-variant="white">
+        <b-card-body>
+          <div style="display: flex; width: 50%">
+            <b-form class="sel">
+              <label for="bairros">Bairro</label>
+              <div class="sel">
+                <b-form-select
+                  class="select"
+                  id="bairros"
+                  label-field="bairros"
+                  :options="options"
+                  @change="onChange($event)"
+                ></b-form-select>
+              </div>
+            </b-form>
+            <b-form class="sel">
+              <label for="sessao">Sessão</label>
+              <div class="sel">
+                <b-form-select
+                  class="select"
+                  id="sessao"
+                  label-field="sessao"
+                  :options="options2"
+                ></b-form-select>
+              </div>
+            </b-form>
+            <!-- <b-form class="sel">
           <label for="telefones">Numero</label>
           <div class="sel">
             <b-form-select
@@ -32,55 +47,57 @@
             ></b-form-select>
           </div>
         </b-form> -->
-        </div>
-        <b-form class="form">
-          <b-form-group
-            id="input-group-1"
-            label="Mensagem"
-            label-align-sm="right"
-            label-for="textarea"
-          >
-            <b-form-textarea
-              id="textarea"
-              placeholder="Digite sua mensagem..."
-              v-model="mensagem"
-              rows="10"
-            ></b-form-textarea>
-          </b-form-group>
-        </b-form>
-        <!-- <div class="input-group mb-1">
+          </div>
+          <b-form class="form">
+            <b-form-group
+              id="input-group-1"
+              label="Mensagem"
+              label-align-sm="right"
+              label-for="textarea"
+            >
+              <b-form-textarea
+                id="textarea"
+                placeholder="Digite sua mensagem..."
+                v-model="mensagem"
+                rows="10"
+              ></b-form-textarea>
+            </b-form-group>
+          </b-form>
+          <!-- <div class="input-group mb-1">
           <input type="file" class="form-control" id="inputGroupFile02" accept=".jpg,.gif,.png" @change="changeFile()"/>
         </div> -->
-        <div class="button-group">
-          <p class="total">Total de contatos neste bairro: {{ total }}</p>
-          <b-button
-            variant="primary"
-            class="button"
-            style="margin-left: auto"
-            @click="enviar()"
-            >Enviar</b-button
-          >
-        </div>
-        <div>
-          <progress
-            id="bar"
-            class="progre"
-            value="0"
-            :max="total"
-            style="margin-top: 20px; width: 100%"
-          >
-            <span></span>
-          </progress>
-          <p class="totalenv">Numero de mensagens enviadas</p>
-        </div>
-      </b-card-body>
-    </b-card>
+          <div class="button-group">
+            <p class="total">Total de contatos neste bairro: {{ total }}</p>
+            <b-button
+              variant="primary"
+              class="button"
+              style="margin-left: auto"
+              @click="enviar()"
+              >Enviar</b-button
+            >
+          </div>
+          <div>
+            <progress
+              id="bar"
+              class="progre"
+              value="0"
+              :max="total"
+              style="margin-top: 20px; width: 100%"
+            >
+              <span></span>
+            </progress>
+            <p class="totalenv">Numero de mensagens enviadas</p>
+          </div>
+        </b-card-body>
+      </b-card>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import Menu from "./Menu.vue";
 
 export default {
   mounted() {
@@ -100,6 +117,7 @@ export default {
   data() {
     return {
       options: [],
+      options2: ["adenilson"],
       totais: {},
       total: 0,
       bairro: "",
@@ -107,6 +125,9 @@ export default {
       enviadas: 0,
       file1: null,
     };
+  },
+  components: {
+    Menu,
   },
   methods: {
     onChange(e) {
@@ -158,16 +179,16 @@ export default {
       //     }
       //   });
       // }
-      
+
       // // aqui coloca uma variavel do data = intervalMSG
-      // // viu ai , passei a variavel 
+      // // viu ai , passei a variavel
       // // lkkkk nome diferente satanas kkk  ia  perguntar aonde tava kkk, mas blz
       // // tem q funfa
       // let idint = setInterval(()=>{
       //   keepAlive(idint)
       // }, 5000)
 
-      let idInterval = setInterval(() => { 
+      let idInterval = setInterval(() => {
         axios({
           method: "get",
           url: "http://10.19.92.40:8000/api/status",
@@ -243,5 +264,11 @@ progress:after {
   font-weight: 600;
   content: attr(value) "/" attr(max);
   position: absolute;
+}
+
+.home {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
 }
 </style>
