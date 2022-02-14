@@ -6,7 +6,7 @@
       <!-- Icon -->
       <div class="fadeIn first">
         <b-img
-          :src="require('../assets/logotop.png')"
+          :src="require('../assets/adenilsonlogo.png')"
           fluid
           alt="Responsive image"
           style="margin-top: 20px; margin-bottom: 20px"
@@ -70,34 +70,36 @@ export default {
     onChange(event) {
       console.log(event);
     },
-    submit() {
-      let dada = {
-        email: this.email,
-        password: this.senha,
-      };
+    async submit() {
+      try {
+        let data = {
+          email: this.email,
+          password: this.senha,
+        };
 
-        axios({
-            method: "post",
-            url: "http://localhost:8000/api/login",
-            data: dada,
-            headers: {
-              "Content-Type": "text/plain",
-            },
-        }).then((response) => {
-            console.log(response);
-            if (response.status == 200) {
-              localStorage.setItem("token", response.data.access_token);
-              this.$router.push("/home");
-            } else {
-              Swal.fire({
-                title: "Erro",
-                text: "Usuário ou senha incorretos",
-                icon: "error",
-                confirmButtonText: "Ok",
-              });
-            }
+        const response = await axios({
+          method: "post",
+          url: "http://10.19.92.83:8000/api/login",
+          data: data,
+          headers: {
+            "Content-Type": "text/plain",
+          },
         });
+        console.log(response);
 
+        localStorage.setItem("token", response.data.access_token);
+        this.$router.push("/home");
+
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+        Swal.fire({
+          title: "Erro",
+          text: "Usuário ou senha incorretos",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      }
     },
   },
 };
@@ -145,7 +147,7 @@ h2 {
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
-  background: #fff;
+  background: #000;
   padding: 30px;
   width: 90%;
   max-width: 450px;

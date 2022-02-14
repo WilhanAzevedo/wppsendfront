@@ -5,9 +5,9 @@
         <b-nav-item id="homes">
           <router-link to="/home">Home</router-link>
         </b-nav-item>
-        <b-nav-item id="chats">
+        <!-- <b-nav-item id="chats">
           <router-link to="/chat">Chat</router-link>
-        </b-nav-item>
+        </b-nav-item> -->
       </b-navbar-nav>
     </b-navbar>
   </div>
@@ -40,14 +40,16 @@ export default {
 </script>
 
 <style>
+
 a {
   text-decoration: none;
   font-size: 15px;
   color: #ffffff;
+  font-weight: 700;
 }
 
 a:hover{
-    color: #a36513;
+    color: #009688;
 }
 
 .menu{
@@ -60,11 +62,11 @@ a:hover{
 }
 
 .active{
-    background-color: #ffffff;
+    background-color: #009688;
     border-radius: 10px;
 }
 
 .active a{
-    color: #000000;
+    color: #ffffff;
 }
 </style>

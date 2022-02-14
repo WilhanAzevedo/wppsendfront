@@ -15,11 +15,11 @@ const routes = [
     name: "home",
     component: () => import("../components/Home.vue"),
   },
-  {
-    path: "/chat",
-    name: "chat",
-    component: () => import("../components/Chat.vue"),
-  }
+  // {
+  //   path: "/chat",
+  //   name: "chat",
+  //   component: () => import("../components/Chat.vue"),
+  // }
 
 ];
 
